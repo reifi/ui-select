@@ -618,7 +618,7 @@
           var data = $select.parserResult.source (scope, { $select : {search:''}}), //Overwrite $search 
               locals = {},
               result;
-          if (data){
+          if (data && data.length > 0){
             if ($select.multiple){
               var resultMultiple = [];
               var checkFnMultiple = function(list, value){
