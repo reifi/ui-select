@@ -8,3 +8,6 @@ Adapted from angular-ui https://github.com/angular-ui/ui-select
 # Roadmap
 * adding new entries to selection - onAdd()
 
+# Far Roadmap
+* make it work with extjs like stores and proper selection model
+
