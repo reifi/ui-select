@@ -346,6 +346,30 @@
       }
     };
 
+              // When User enters a value that is to be added to selection
+              ctrl.add = function (search, skipFocusser) {
+                console.log('ctr.add() called', search);
+
+                //var locals = {};
+                //locals[ctrl.parserResult.itemName] = item;
+
+                var items = ctrl.onAddCallback($scope, {
+                  value: search,
+                  //$model: ctrl.parserResult.modelMapper($scope, locals)
+                });
+
+                console.log('onAddCallback result', items);
+
+                if (ctrl.multiple) {
+                  Array.prototype.push.apply(ctrl.selected, items);
+                  ctrl.sizeSearchInput();
+                } else {
+                  ctrl.selected = items[0];
+                }
+                ctrl.close(skipFocusser);
+
+              };
+
     // Closes the dropdown
     ctrl.close = function(skipFocusser) {
       if (!ctrl.open) return;        
@@ -510,7 +534,11 @@
           processed = _handleDropDownSelection(key);
         }
         
-        if (processed  && key != KEY.TAB) {
+        if (!processed && key == KEY.ENTER) {
+          processed = _handleAddSelection();
+        }
+
+        if (processed && key != KEY.TAB) {
           //TODO Check si el tab selecciona aun correctamente
           //Crear test
           e.preventDefault();
@@ -529,6 +557,10 @@
         ctrl.activeMatchIndex = -1;
       });
     });
+
+    function _handleAddSelection() {
+      ctrl.add(ctrl.search);
+    }
 
     function _getCaretPosition(el) {
       if(angular.isNumber(el.selectionStart)) return el.selectionStart;
@@ -591,6 +623,7 @@
 
         $select.onSelectCallback = $parse(attrs.onSelect);
         $select.onRemoveCallback = $parse(attrs.onRemove);
+        $select.onAddCallback = $parse(attrs.onAdd);
 
         //From view --> model
         ngModel.$parsers.unshift(function (inputValue) {
