@@ -346,29 +346,28 @@
       }
     };
 
-              // When User enters a value that is to be added to selection
-              ctrl.add = function (search, skipFocusser) {
-                console.log('ctr.add() called', search);
-
-                //var locals = {};
-                //locals[ctrl.parserResult.itemName] = item;
-
-                var items = ctrl.onAddCallback($scope, {
-                  value: search,
-                  //$model: ctrl.parserResult.modelMapper($scope, locals)
-                });
-
-                console.log('onAddCallback result', items);
-
-                if (ctrl.multiple) {
-                  Array.prototype.push.apply(ctrl.selected, items);
-                  ctrl.sizeSearchInput();
-                } else {
-                  ctrl.selected = items[0];
-                }
-                ctrl.close(skipFocusser);
-
-              };
+    // When User enters a value that is to be added to selection
+    ctrl.add = function (search, skipFocusser) {
+      
+      var items = ctrl.onAddCallback($scope, {
+        value: search,
+        //$model: ctrl.parserResult.modelMapper($scope, locals)
+      });
+      
+      if (angular.isUndefined(items)) {
+        items = [];
+      } else if (!angular.isArray(items)) {
+        items = [items];
+      }
+      
+      if (ctrl.multiple) {
+        Array.prototype.push.apply(ctrl.selected, items);
+        ctrl.sizeSearchInput();
+      } else {
+        ctrl.selected = items[0];
+      }
+      ctrl.close(skipFocusser);
+    };
 
     // Closes the dropdown
     ctrl.close = function(skipFocusser) {
@@ -624,7 +623,7 @@
         $select.onSelectCallback = $parse(attrs.onSelect);
         $select.onRemoveCallback = $parse(attrs.onRemove);
         $select.onAddCallback = $parse(attrs.onAdd);
-
+        
         //From view --> model
         ngModel.$parsers.unshift(function (inputValue) {
           var locals = {},
