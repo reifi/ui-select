@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.8.3 - 2014-10-17T12:59:40.984Z
+ * Version: 0.8.3 - 2014-10-23T13:28:47.310Z
  * License: MIT
  */
 
@@ -639,6 +639,9 @@
         var ngModel = ctrls[1];
 
         var searchInput = element.querySelectorAll('input.ui-select-search');
+        if (attrs.inputId) {
+          searchInput[0].id = attrs.inputId;
+        }
 
         $select.multiple = (angular.isDefined(attrs.multiple)) ? (attrs.multiple === '') ? true : (attrs.multiple.toLowerCase() === 'true') : false;
 

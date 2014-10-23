@@ -631,6 +631,9 @@
         var ngModel = ctrls[1];
 
         var searchInput = element.querySelectorAll('input.ui-select-search');
+        if (attrs.inputId) {
+          searchInput[0].id = attrs.inputId;
+        }
 
         $select.multiple = (angular.isDefined(attrs.multiple)) ? (attrs.multiple === '') ? true : (attrs.multiple.toLowerCase() === 'true') : false;
 
