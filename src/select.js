@@ -802,8 +802,12 @@
             if (oldValue != newValue)
               ngModel.$modelValue = null; //Force scope model value and ngModel value to be out of sync to re-run formatters
           });
-          scope.$watchCollection('$select.selected', function() {
-            ngModel.$setViewValue(Date.now()); //Set timestamp as a unique string to force changes
+          scope.$watchCollection('$select.selected', function(newCol) {
+            if (ngModel.$pristine && newCol.length === 0)  {
+              // preserve $pristine state for empty values, don't setViewValue
+            } else {
+              ngModel.$setViewValue(Date.now()); //Set timestamp as a unique string to force changes
+            }
           });
           focusser.prop('disabled', true); //Focusser isn't needed if multiple
         }else{

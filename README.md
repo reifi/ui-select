@@ -7,6 +7,7 @@ Adapted from angular-ui https://github.com/angular-ui/ui-select
 * Preselection independent from data in repeat
 * new attribute 'on-add' callback function attribute for adding new entries to selection by ENTER key
 * new attribute 'input-id' to pass id to underlying input field to support form labels
+* multiple: preserve FormController's $pristine state when preselection ($select.selected) is empty 
 
 # Roadmap
 
