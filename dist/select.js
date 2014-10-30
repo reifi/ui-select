@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.8.3 - 2014-10-24T11:39:04.439Z
+ * Version: 0.8.3 - 2014-10-30T13:06:02.709Z
  * License: MIT
  */
 
@@ -581,6 +581,7 @@
 
     function _handleAddSelection() {
       ctrl.add(ctrl.search);
+      return true;
     }
 
     function _getCaretPosition(el) {

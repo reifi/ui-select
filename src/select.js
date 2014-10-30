@@ -573,6 +573,7 @@
 
     function _handleAddSelection() {
       ctrl.add(ctrl.search);
+      return true;
     }
 
     function _getCaretPosition(el) {
