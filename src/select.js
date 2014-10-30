@@ -350,7 +350,7 @@
     ctrl.add = function (search, skipFocusser) {
       
       var items = ctrl.onAddCallback($scope, {
-        value: search,
+        value: search
         //$model: ctrl.parserResult.modelMapper($scope, locals)
       });
       
@@ -566,6 +566,7 @@
     });
 
     _searchInput.on('blur', function() {
+      _handleAddSelection();
       $timeout(function() {
         ctrl.activeMatchIndex = -1;
       });
