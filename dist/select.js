@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.8.6 - 2014-10-30T13:17:32.003Z
+ * Version: 0.8.7 - 2014-10-30T14:04:26.936Z
  * License: MIT
  */
 
@@ -358,7 +358,7 @@
     ctrl.add = function (search, skipFocusser) {
       
       var items = ctrl.onAddCallback($scope, {
-        value: search,
+        value: search
         //$model: ctrl.parserResult.modelMapper($scope, locals)
       });
       
@@ -574,6 +574,7 @@
     });
 
     _searchInput.on('blur', function() {
+      _handleAddSelection();
       $timeout(function() {
         ctrl.activeMatchIndex = -1;
       });
