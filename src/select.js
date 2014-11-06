@@ -348,9 +348,6 @@
 
     // When User enters a value that is to be added to selection
     ctrl.add = function (search, skipFocusser) {
-      if (search === '') {
-        return;
-      }
       
       var items = ctrl.onAddCallback($scope, {
         value: search
@@ -369,7 +366,12 @@
       } else {
         ctrl.selected = items[0];
       }
+      if (items.length > 0) {
       ctrl.close(skipFocusser);
+        return true;
+      } else {
+        return false;
+      }
     };
 
     // Closes the dropdown
