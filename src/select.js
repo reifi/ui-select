@@ -325,7 +325,7 @@
       return isDisabled;
     };
 
-    ctrl.enterSelect = function(item) {
+    ctrl.enterSelect = function() {
       ctrl.enteredSelect = true;
     };
 
@@ -576,7 +576,7 @@
 
     });
 
-    _searchInput.on('blur', function(e) {
+    _searchInput.on('blur', function() {
       $timeout(function() {
         if (!ctrl.enteredSelect) {
           _handleAddSelection();
