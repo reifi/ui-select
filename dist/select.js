@@ -374,7 +374,13 @@
       } else {
         ctrl.selected = items[0];
       }
+      
+      if (items.length > 0) {
       ctrl.close(skipFocusser);
+        return true;
+      } else {
+        return false;
+      }
     };
 
     // Closes the dropdown
