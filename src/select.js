@@ -159,6 +159,7 @@
     ctrl.refreshDelay = undefined; // Initialized inside uiSelectChoices directive link function
     ctrl.multiple = false; // Initialized inside uiSelect directive link function
     ctrl.disableChoiceExpression = undefined; // Initialized inside uiSelect directive link function
+    ctrl.enteredSelect = false;
 
     ctrl.isEmpty = function() {
       return angular.isUndefined(ctrl.selected) || ctrl.selected === null || ctrl.selected === '';
@@ -324,6 +325,10 @@
       return isDisabled;
     };
 
+    ctrl.enterSelect = function(item) {
+      ctrl.enteredSelect = true;
+    };
+
     // When the user clicks on an item inside the dropdown
     ctrl.select = function(item, skipFocusser) {
 
@@ -376,6 +381,7 @@
 
     // Closes the dropdown
     ctrl.close = function(skipFocusser) {
+      ctrl.enteredSelect = false;
       if (!ctrl.open) return;        
       _resetSearchInput();
       ctrl.open = false;
@@ -570,9 +576,11 @@
 
     });
 
-    _searchInput.on('blur', function() {
-      _handleAddSelection();
+    _searchInput.on('blur', function(e) {
       $timeout(function() {
+        if (!ctrl.enteredSelect) {
+          _handleAddSelection();
+        }
         ctrl.activeMatchIndex = -1;
       });
     });
@@ -743,6 +751,7 @@
           focusser.bind("focus", function(){
             scope.$evalAsync(function(){
               $select.focus = true;
+              $select.enteredSelect = false;
             });
           });
           focusser.bind("blur", function(){
@@ -932,7 +941,8 @@
 
           choices.attr('ng-repeat', RepeatParser.getNgRepeatExpression($select.parserResult.itemName, '$select.items', $select.parserResult.trackByExp, groupByExp))
               .attr('ng-mouseenter', '$select.setActiveItem('+$select.parserResult.itemName +')')
-              .attr('ng-click', '$select.select(' + $select.parserResult.itemName + ')');
+              .attr('ng-click', '$select.select(' + $select.parserResult.itemName + ')')
+              .attr('ng-mousedown', '$select.enterSelect(' + $select.parserResult.itemName + ')');
 
           var rowsInner = element.querySelectorAll('.ui-select-choices-row-inner');
           if (rowsInner.length !== 1) throw uiSelectMinErr('rows', "Expected 1 .ui-select-choices-row-inner but got '{0}'.", rowsInner.length);
