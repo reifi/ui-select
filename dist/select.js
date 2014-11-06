@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.8.7 - 2014-10-30T14:04:26.936Z
+ * Version: 0.8.8 - 2014-11-06T17:08:13.289Z
  * License: MIT
  */
 
@@ -374,7 +374,6 @@
       } else {
         ctrl.selected = items[0];
       }
-      
       if (items.length > 0) {
       ctrl.close(skipFocusser);
         return true;
