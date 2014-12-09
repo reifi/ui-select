@@ -2,6 +2,9 @@
 
 Adapted from angular-ui https://github.com/angular-ui/ui-select
 
+Do not link/use this file directly in your projects.
+It's still more a playground for me and I don't respect correct semantic versioning yet.
+
 # Differences from angular-ui
 
 * Preselection independent from data in repeat
