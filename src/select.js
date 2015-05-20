@@ -975,7 +975,7 @@
         }
       };
   })
-  .directive('uiSelectMatch', ['uiSelectConfig', function(uiSelectConfig) {
+  .directive('uiSelectMatch', ['uiSelectConfig', '$parse', function(uiSelectConfig, $parse) {
     return {
       restrict: 'EA',
       require: '^uiSelect',
@@ -994,6 +994,15 @@
 
         if($select.multiple){
             $select.sizeSearchInput();
+        }
+        
+        if (!!attrs.itemNgClass) {
+          var invoker = $parse(attrs.itemNgClass);
+          $select.getNgClass = function(item, obj){
+            return angular.extend({},obj,invoker(scope,{$item:item}));
+          };
+        } else {
+          $select.getNgClass= angular.noop;
         }
 
       }
