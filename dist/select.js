@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.8.10 - 2015-05-20T15:41:09.956Z
+ * Version: 0.8.11 - 2015-10-20T09:37:26.060Z
  * License: MIT
  */
 
@@ -375,7 +375,7 @@
       
       if (ctrl.multiple) {
         Array.prototype.push.apply(ctrl.selected, items);
-        ctrl.sizeSearchInput();
+        ctrl.sizeSearchInput().then(ctrl.scrollMatchContainerToBottom);
       } else {
         ctrl.selected = items[0];
       }
@@ -428,6 +428,12 @@
       //Refactor single?
       if(ctrl.multiple && ctrl.selected.length) return;
       return ctrl.placeholder;
+    };
+    
+    ctrl.scrollMatchContainerToBottom = function(){
+      // container is the div that wraps div.ui-select-match (used for multiple add)
+      var container = _searchInput.parent()[0];
+      container.scrollTop = container.scrollHeight - container.clientHeight;
     };
 
     var containerSizeWatch; 
