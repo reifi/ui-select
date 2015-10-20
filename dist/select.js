@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.8.11 - 2015-10-20T09:37:26.060Z
+ * Version: 0.8.11 - 2015-10-20T10:00:07.528Z
  * License: MIT
  */
 
@@ -446,7 +446,7 @@
         if(newWidth < 50) newWidth = container.clientWidth;
         _searchInput.css('width',newWidth+'px');
       };
-      $timeout(function(){ //Give tags time to render correctly
+      return $timeout(function(){ //Give tags time to render correctly
         if (container.clientWidth === 0 && !containerSizeWatch){
           containerSizeWatch = $scope.$watch(function(){ return container.clientWidth;}, function(newValue){
             if (newValue !== 0){
