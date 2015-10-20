@@ -438,7 +438,7 @@
         if(newWidth < 50) newWidth = container.clientWidth;
         _searchInput.css('width',newWidth+'px');
       };
-      $timeout(function(){ //Give tags time to render correctly
+      return $timeout(function(){ //Give tags time to render correctly
         if (container.clientWidth === 0 && !containerSizeWatch){
           containerSizeWatch = $scope.$watch(function(){ return container.clientWidth;}, function(newValue){
             if (newValue !== 0){
