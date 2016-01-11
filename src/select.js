@@ -583,10 +583,10 @@
     });
 
     _searchInput.on('blur', function() {
+      if (!ctrl.enteredSelect) {
+        _handleAddSelection();
+      }
       $timeout(function() {
-        if (!ctrl.enteredSelect) {
-          _handleAddSelection();
-        }
         ctrl.activeMatchIndex = -1;
       });
     });

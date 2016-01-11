@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.8.11 - 2015-10-20T10:00:07.528Z
+ * Version: 0.8.12 - 2016-01-11T14:12:49.406Z
  * License: MIT
  */
 
@@ -591,10 +591,10 @@
     });
 
     _searchInput.on('blur', function() {
+      if (!ctrl.enteredSelect) {
+        _handleAddSelection();
+      }
       $timeout(function() {
-        if (!ctrl.enteredSelect) {
-          _handleAddSelection();
-        }
         ctrl.activeMatchIndex = -1;
       });
     });
