@@ -343,7 +343,7 @@
 
         if(ctrl.multiple){
           ctrl.selected.push(item);
-          ctrl.sizeSearchInput();
+          ctrl.sizeSearchInput().then(ctrl.scrollMatchContainerToBottom);
         } else {
           ctrl.selected = item;
         }

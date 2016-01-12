@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.8.12 - 2016-01-11T14:12:49.406Z
+ * Version: 0.8.13 - 2016-01-12T13:57:40.146Z
  * License: MIT
  */
 
@@ -351,7 +351,7 @@
 
         if(ctrl.multiple){
           ctrl.selected.push(item);
-          ctrl.sizeSearchInput();
+          ctrl.sizeSearchInput().then(ctrl.scrollMatchContainerToBottom);
         } else {
           ctrl.selected = item;
         }
