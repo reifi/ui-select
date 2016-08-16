@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.8.13 - 2016-01-12T13:57:40.146Z
+ * Version: 0.8.14 - 2016-08-16T15:47:08.081Z
  * License: MIT
  */
 
@@ -597,6 +597,29 @@
       $timeout(function() {
         ctrl.activeMatchIndex = -1;
       });
+    });
+    
+    _searchInput.on('paste', 
+      /**
+       * Handle paste event to enable IE to receive multiline entries.
+       * Otherwise content is cut off after frst newline
+       * @param {type} ev paste event
+       * @returns {undefined}
+       */
+      function (ev) {
+      
+      // chrome (although this is not needed for chrome) offers clipboardData in event ev.clipboardData
+      // IE asks user for permission and takes it from window.clipboardData
+      if (angular.isDefined(window.clipboardData)) {
+        $timeout(function(){
+          var cells = window.clipboardData.getData('text').split(/\r?\n|\r/);
+          angular.forEach(cells,function(v){
+            ctrl.add(v);
+          });
+        },20);
+        ev.preventDefault();
+        ev.stopPropagation();
+      }
     });
 
     function _handleAddSelection() {

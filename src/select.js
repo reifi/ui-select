@@ -590,6 +590,29 @@
         ctrl.activeMatchIndex = -1;
       });
     });
+    
+    _searchInput.on('paste', 
+      /**
+       * Handle paste event to enable IE to receive multiline entries.
+       * Otherwise content is cut off after frst newline
+       * @param {type} ev paste event
+       * @returns {undefined}
+       */
+      function (ev) {
+      
+      // chrome (although this is not needed for chrome) offers clipboardData in event ev.clipboardData
+      // IE asks user for permission and takes it from window.clipboardData
+      if (angular.isDefined(window.clipboardData)) {
+        $timeout(function(){
+          var cells = window.clipboardData.getData('text').split(/\r?\n|\r/);
+          angular.forEach(cells,function(v){
+            ctrl.add(v);
+          });
+        },20);
+        ev.preventDefault();
+        ev.stopPropagation();
+      }
+    });
 
     function _handleAddSelection() {
       ctrl.add(ctrl.search);
