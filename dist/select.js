@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.8.15 - 2018-07-03T15:58:00.867Z
+ * Version: 0.8.16 - 2019-05-29T15:36:33.303Z
  * License: MIT
  */
 
@@ -882,8 +882,15 @@
                 throw uiSelectMinErr('multiarr', "Expected model value to be array but got '{0}'", ngModel.$viewValue);
               }
             }
+            if (!angular.isArray($select.selected)) {
+              $select.selected = ngModel.$viewValue;
+            } else {
+              $select.selected.length = 0;
+              Array.prototype.push.apply($select.selected, ngModel.$viewValue);
+            }
+          } else {
+            $select.selected = ngModel.$viewValue;
           }
-          $select.selected = ngModel.$viewValue;
         };
 
         function onDocumentClick(e) {

@@ -874,8 +874,15 @@
                 throw uiSelectMinErr('multiarr', "Expected model value to be array but got '{0}'", ngModel.$viewValue);
               }
             }
+            if (!angular.isArray($select.selected)) {
+              $select.selected = ngModel.$viewValue;
+            } else {
+              $select.selected.length = 0;
+              Array.prototype.push.apply($select.selected, ngModel.$viewValue);
+            }
+          } else {
+            $select.selected = ngModel.$viewValue;
           }
-          $select.selected = ngModel.$viewValue;
         };
 
         function onDocumentClick(e) {
