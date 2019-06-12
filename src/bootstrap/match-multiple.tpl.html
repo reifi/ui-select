@@ -6,9 +6,9 @@
       tabindex="-1"
       type="button"
       ng-disabled="$select.disabled"
-      ng-click="$select.activeMatchIndex = $index;"
+      ng-click="$select.activeMatchIndex = $index;$event.stopPropagation();"
       ng-class="$select.getNgClass($item,{'btn-primary':$select.activeMatchIndex === $index})">
-        <span class="close ui-select-match-close" ng-hide="$select.disabled" ng-click="$select.removeChoice($index)">&nbsp;&times;</span>
+        <span class="close ui-select-match-close" ng-hide="$select.disabled" ng-click="$select.removeChoice($index, $event)">&nbsp;&times;</span>
         <span uis-transclude-append></span>
     </span>
   </span>

@@ -401,7 +401,7 @@
     };
 
     // Remove item from multiple select
-    ctrl.removeChoice = function(index){
+    ctrl.removeChoice = function(index, $event){
       var removedChoice = ctrl.selected[index];
       var locals = {};
       locals[ctrl.parserResult.itemName] = removedChoice;
@@ -414,6 +414,10 @@
         $item: removedChoice,
         $model: ctrl.parserResult.modelMapper($scope, locals)
       });
+      if ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+      }
     };
 
     ctrl.getPlaceholder = function(){
