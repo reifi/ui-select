@@ -851,9 +851,11 @@
             if (oldValue != newValue)
               ngModel.$modelValue = null; //Force scope model value and ngModel value to be out of sync to re-run formatters
           });
+          $select.firstPass = true; // so the form doesn't get dirty as soon as it loads
           scope.$watchCollection('$select.selected', function(newCol) {
-            if (ngModel.$pristine && newCol.length === 0)  {
+            if ((ngModel.$pristine && newCol.length === 0) || $select.firstPass)  { 
               // preserve $pristine state for empty values, don't setViewValue
+              $select.firstPass = true;
             } else {
               ngModel.$setViewValue(Date.now()); //Set timestamp as a unique string to force changes
             }
