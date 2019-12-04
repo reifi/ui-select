@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.8.17 - 2019-06-12T09:36:32.536Z
+ * Version: 0.8.21 - 2019-12-04T15:30:47.698Z
  * License: MIT
  */
 
@@ -426,6 +426,7 @@
         $event.preventDefault();
         $event.stopPropagation();
       }
+      ctrl.ngModel.$setViewValue(Date.now()); //Set timestamp as a unique string to force changes (otherwise removal of last item might be unrecognized)
     };
 
     ctrl.getPlaceholder = function(){

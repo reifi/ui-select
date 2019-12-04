@@ -418,6 +418,7 @@
         $event.preventDefault();
         $event.stopPropagation();
       }
+      ctrl.ngModel.$setViewValue(Date.now()); //Set timestamp as a unique string to force changes (otherwise removal of last item might be unrecognized)
     };
 
     ctrl.getPlaceholder = function(){
